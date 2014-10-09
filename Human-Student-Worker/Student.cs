@@ -37,6 +37,6 @@ public class Student : Human
 
     public override string ToString()
     {
-        return String.Format("Student: {0} {1} has faculty number: {2}", this, FirstName, this.LastName, this.FacultyNumber);
+        return String.Format("Student: {0} {1} has faculty number: {2}", this.FirstName, this.LastName, this.FacultyNumber);
     }
 }
