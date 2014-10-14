@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class CreatingAndSortingHumans
 {
@@ -16,7 +17,7 @@ class CreatingAndSortingHumans
             new Student("David", "Beckham", "2314fsa"),
             new Student("David", "Jones", "isajfof"),
             new Student("Shyla", "Styles", "faifashi"),
-            new Student("Asa", "Akira", "asianbeaty") 
+            new Student("Asa", "Akira", "asianbeaty")
         };
 
         List<Worker> workers = new List<Worker>
@@ -36,6 +37,40 @@ class CreatingAndSortingHumans
         foreach(var student in students)
         {
             Console.WriteLine(student);
+        }
+        Console.WriteLine();
+        foreach(var worker in workers)
+        {
+            Console.WriteLine(String.Format("{0} \nmoney per hour for {2} --> {1}", worker,
+                worker.MoneyPerHour(), worker.FirstName));
+        }
+        Console.WriteLine("\nSorting students by fac. number in ascending order.\n");
+
+        var sortedStudentstByFacNumber = students.OrderBy(x => x.FacultyNumber);
+        foreach (var st in sortedStudentstByFacNumber)
+        {
+            Console.WriteLine("{0} | {1} {2}", st.FacultyNumber, st.FirstName, st.LastName);
+        }
+
+        Console.WriteLine("\nSorted workers by paymen per hour\n");
+
+        var sortedWorkersByPaymentPerHour = workers.OrderByDescending(x => x.MoneyPerHour());
+        foreach (var wor in sortedWorkersByPaymentPerHour)
+        {
+            Console.WriteLine("{0} | {1} {2}", wor.MoneyPerHour(), wor.FirstName, wor.LastName);
+        }
+
+        Console.WriteLine("\nSorted humans by first and last name.\n");
+
+        var humans = new List<Human>();
+        humans.AddRange(students);
+        humans.AddRange(workers);
+
+        var sortedHumansByName = humans.OrderBy(x => x.FirstName)
+            .ThenBy(x => x.LastName);
+        foreach (var human in sortedHumansByName)
+        {
+            Console.WriteLine("{0} {1} | {2}", human.FirstName, human.LastName, human.GetType());
         }
     }
 }
